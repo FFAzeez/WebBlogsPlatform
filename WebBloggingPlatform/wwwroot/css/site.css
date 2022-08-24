@@ -14,7 +14,6 @@ a {
 
 .right-bck {
     background-color: #ffffff;
-    border:3px solid blue;
 }
 
 .card-title{
@@ -46,9 +45,6 @@ a {
 .event-list h4 {
     color: #ffffff;
     font-size: 16px
-}
-#upMove{
-    border:3px solid red;
 }
 .event-list .card-title span {
     padding-left: 5px;
