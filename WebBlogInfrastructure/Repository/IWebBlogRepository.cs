@@ -7,6 +7,7 @@ namespace WebBlogInfrastructure.Repository
     public interface IWebBlogRepository
     {
         Task<bool> Add(WebBlog blog);
+        Task<bool> AddRange(List<WebBlog> blog);
         Task<List<WebBlog>> AllBlogPosted();
         Task<User> GetUser(string Id);
         Task<User> FindByEmailPassword(string email, string password);

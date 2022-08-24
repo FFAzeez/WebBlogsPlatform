@@ -21,6 +21,12 @@ namespace WebBlogInfrastructure.Repository
             return await SaveAsync();
         }
 
+        public async Task<bool> AddRange(List<WebBlog> blog)
+        {
+            _dbContext.AddRange(blog);
+            return await SaveAsync();
+        }
+
         public async Task<User> GetUser(string Id)
         {
             return await _dbContext.Users.Include(x=>x.WebBlogs).FirstOrDefaultAsync(x => x.Id == Id);

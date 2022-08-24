@@ -63,15 +63,17 @@ namespace WebBloggingPlatform.Controllers
         {
             if (!blog.ImportBlogs)
             {
-                blog.WebBlog.Id = Guid.NewGuid().ToString();
                 blog.WebBlog.Publication_date = DateTime.Now;
                 var result = _mapper.Map<WebBlog>(blog.WebBlog);
+                result.Id = Guid.NewGuid().ToString();
                 result.UserId = Common.GetUserId(this.User);
                 await _blogRepository.Add(result);
                 return RedirectToAction("Index");
             }
 
             var answer = await _sendHttp.SendAsync<ImportBlogVM>();
+            var map = _mapper.Map<List<WebBlog>>(answer.Data);
+            await _blogRepository.AddRange(map);
             return RedirectToAction("Index");
 
         }

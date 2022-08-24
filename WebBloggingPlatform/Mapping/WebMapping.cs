@@ -21,7 +21,6 @@ namespace WebBloggingPlatform.Mapping
             {
                 webBlog.Add(new WebBlogVM
                 {
-                    Id = model.Id,
                     Title = model.Title,
                     Publication_date = model.PublicationDate,
                     Description = model.Description
