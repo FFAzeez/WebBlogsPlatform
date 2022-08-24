@@ -72,7 +72,7 @@ namespace WebBloggingPlatform.Controllers
             }
 
             var answer = await _sendHttp.SendAsync<ImportBlogVM>();
-            var map = _mapper.Map<List<WebBlog>>(answer.Data);
+            var map = WebMapping.WebBlogs(answer.Data, Common.GetUserId(this.User));
             await _blogRepository.AddRange(map);
             return RedirectToAction("Index");
 
