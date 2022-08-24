@@ -39,7 +39,7 @@ namespace WebBlogInfrastructure.Repository
 
         public async Task<List<WebBlog>> AllBlogPosted()
         {
-            return await _dbContext.WebBlogs.ToListAsync();
+            return await _dbContext.WebBlogs.OrderByDescending(x=>x.PublicationDate.Date).ToListAsync();
         }
         private async Task<bool> SaveAsync()
         {
