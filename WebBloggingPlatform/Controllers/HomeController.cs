@@ -64,7 +64,7 @@ namespace WebBloggingPlatform.Controllers
             if (!blog.ImportBlogs)
             {
                 blog.WebBlog.Id = Guid.NewGuid().ToString();
-                blog.WebBlog.PublicationDate = DateTime.Now;
+                blog.WebBlog.Publication_date = DateTime.Now;
                 var result = _mapper.Map<WebBlog>(blog.WebBlog);
                 result.UserId = Common.GetUserId(this.User);
                 await _blogRepository.Add(result);

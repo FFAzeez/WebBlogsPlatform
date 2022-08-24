@@ -9,7 +9,8 @@ namespace WebBloggingPlatform.Mapping
     {
         public WebMapping()
         {
-            CreateMap<WebBlog, WebBlogVM>().ReverseMap();
+            CreateMap<WebBlog, WebBlogVM>().ReverseMap()
+                .ForMember(x=>x.PublicationDate, y=>y.MapFrom(x=>x.Publication_date));
             CreateMap<User, RegisterVM>().ReverseMap();
         }
 
@@ -22,7 +23,7 @@ namespace WebBloggingPlatform.Mapping
                 {
                     Id = model.Id,
                     Title = model.Title,
-                    PublicationDate = model.PublicationDate,
+                    Publication_date = model.PublicationDate,
                     Description = model.Description
                 });
             }
