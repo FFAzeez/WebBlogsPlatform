@@ -1,0 +1,104 @@
+﻿@inject SignInManager<User> SignInManager;
+@model CommonViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+@if(SignInManager.IsSignedIn(User)){
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4" id="upMove">
+            @using (Html.BeginForm("Dash", "Home", FormMethod.Post))    
+            {  
+                <div class="form-vertical">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WebBlog.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.WebBlog.Title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WebBlog.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WebBlog.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.WebBlog.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WebBlog.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                           @Html.CheckBoxFor(model=>model.ImportBlogs, new { htmlAttributes = new { @class = "form-control" } })
+                           @Html.LabelFor(model => model.ImportBlogs, htmlAttributes: new { @class = "control-label col-md-2", @placeholder="Check to import your blog from other platform" }) 
+                        </div>
+                    </div>
+                  <div class="form-group">
+                      <div class="col-md-10">
+                        <input type="submit" class="btn-primary"  value="Submit"/>
+                       </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <aside >
+                <div class="event-list">
+                    @*---put the for loop here*@
+                    @if(Model.WebBlogs.Count > 0)
+                    {
+                        @foreach(var blog in Model.WebBlogs)
+                        {
+                            <div class="card flex-row">
+                            <div class="card-body">
+                                <div class="card-title h5 h4-sm"><h4>@blog.Title</h4><span>@blog.PublicationDate</span></div>
+                                <p class="card-text">@blog.Description</p>
+                            </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="card flex-row">
+                            <div class="card-body">
+                                <div class="card-title h5 h4-sm"><h4>Title</h4><span>Publication Date</span></div>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+        </aside>
+     </div>
+</div>
+}
+else{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="event-list">
+                    @*---put the for loop here----*@
+                    @if(Model.WebBlogs.Count > 0)
+                    {
+                        @foreach(var blog in Model.WebBlogs)
+                        {
+                            <div class="card flex-row">
+                            <div class="card-body">
+                                <div class="card-title h5 h4-sm"><h4>@blog.Title</h4><span>@blog.PublicationDate</span></div>
+                                <p class="card-text">@blog.Description</p>
+                            </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="card flex-row">
+                            <div class="card-body">
+                                <div class="card-title h5 h4-sm"><h4>Title</h4><span>Publication Date</span></div>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+       </div>
+    </div>
+}
